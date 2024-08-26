@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/egoFragment">
+
+    <fragment
+        android:id="@+id/egoFragment"
+        android:name="com.example.projectfirst.screens.EgoFragment"
+        android:label="fragment_ego"
+        tools:layout="@layout/fragment_ego" />
+    <fragment
+        android:id="@+id/givingFragment"
+        android:name="com.example.projectfirst.screens.GivingFragment"
+        android:label="fragment_giving"
+        tools:layout="@layout/fragment_giving" />
+    <fragment
+        android:id="@+id/hapinessFragment"
+        android:name="com.example.projectfirst.screens.HapinessFragment"
+        android:label="fragment_hapiness"
+        tools:layout="@layout/fragment_hapiness" />
+    <fragment
+        android:id="@+id/kidnessFragment"
+        android:name="com.example.projectfirst.screens.KidnessFragment"
+        android:label="fragment_kidness"
+        tools:layout="@layout/fragment_kidness" />
+    <fragment
+        android:id="@+id/optimismFragment"
+        android:name="com.example.projectfirst.screens.OptimismFragment"
+        android:label="fragment_optimism"
+        tools:layout="@layout/fragment_optimism" />
+    <fragment
+        android:id="@+id/respectFragment"
+        android:name="com.example.projectfirst.screens.RespectFragment"
+        android:label="fragment_respect"
+        tools:layout="@layout/fragment_respect" />
+</navigation>
