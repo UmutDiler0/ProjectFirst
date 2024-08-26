@@ -6,11 +6,6 @@
     app:startDestination="@id/egoFragment">
 
     <fragment
-        android:id="@+id/egoFragment"
-        android:name="com.example.projectfirst.screens.EgoFragment"
-        android:label="fragment_ego"
-        tools:layout="@layout/fragment_ego" />
-    <fragment
         android:id="@+id/givingFragment"
         android:name="com.example.projectfirst.screens.GivingFragment"
         android:label="fragment_giving"
@@ -35,4 +30,9 @@
         android:name="com.example.projectfirst.screens.RespectFragment"
         android:label="fragment_respect"
         tools:layout="@layout/fragment_respect" />
+    <fragment
+        android:id="@+id/egoFragment"
+        android:name="com.example.projectfirst.screens.EgoFragment"
+        android:label="fragment_ego"
+        tools:layout="@layout/fragment_ego" />
 </navigation>

@@ -10,6 +10,8 @@
     tools:context=".MainActivity"
     tools:ignore="UseSwitchCompatOrMaterialXml">
 
+
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/navHostFragmentView"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -17,14 +19,19 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"/>
+        app:layout_constraintBottom_toTopOf="@+id/optimismSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
 
 
 </LinearLayout>
