@@ -6,6 +6,7 @@
     <string name="giving">Giving</string>
     <string name="respect">Respect</string>
     <string name="ego">Ego</string>
+    <string  name="limit">You can only select 4 items</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

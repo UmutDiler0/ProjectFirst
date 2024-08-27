@@ -14,13 +14,19 @@ import androidx.core.view.MenuProvider
 import com.example.projectfirst.MainActivity
 import com.example.projectfirst.R
 import com.example.projectfirst.databinding.FragmentEgoBinding
+import com.example.projectfirst.model.BottomNavItems
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.materialswitch.MaterialSwitch
+import com.google.android.material.snackbar.Snackbar
 
 
 class EgoFragment : Fragment() {
 
     private var _binding: FragmentEgoBinding? = null
     private val binding get() = _binding!!
+    private val bottomNav: BottomNavigationView? get() = (activity as? MainActivity)?.bottomNav
+    private var counter: Int = 1
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,43 +43,54 @@ class EgoFragment : Fragment() {
         disableSwitches()
         bottomNavItemVisibiltyFalse()
 
-        binding.egoSwitch.setItemVisibility(R.id.egoFragment)
 
-        binding.hapinessSwitch.setItemVisibility(R.id.hapinessFragment)
-
-        binding.givingSwitch.setItemVisibility(R.id.givingFragment)
-
-        binding.kidnessSwitch.setItemVisibility(R.id.kidnessFragment)
-
-        binding.optimismSwitch.setItemVisibility(R.id.optimismFragment)
-
-        binding.respectSwitch.setItemVisibility(R.id.respectFragment)
-    }
-
-    //material switch yapılacak ve ext func olarak yazılacak
-    fun MaterialSwitch.setItemVisibility(id: Int){
-
-        setOnCheckedChangeListener { _, isChecked ->
-            if(id == R.id.egoFragment){
-                if(isChecked){
-                    disableSwitches()
-                    bottomNavItemVisibiltyFalse()
-                    (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
-                }else{
-                    enebleSwitches()
-                    setSwitchesFalse()
-                    (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
-                }
-            }
-            (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = isChecked
+        with(binding){
+            egoSwitch.onCheckedChange(R.id.egoFragment)
+            hapinessSwitch.onCheckedChange(R.id.hapinessFragment)
+            optimismSwitch.onCheckedChange(R.id.optimismFragment)
+            kidnessSwitch.onCheckedChange(R.id.kidnessFragment)
+            givingSwitch.onCheckedChange(R.id.givingFragment)
+            respectSwitch.onCheckedChange(R.id.respectFragment)
         }
 
     }
-    // ego açıp diğer switchleri açtıpımızda ekran değişip geri gelince bottom nav nasıl olmalı
 
-    fun fragmentViewCreated(){
-        disableSwitches()
-        binding.egoSwitch.isChecked = true
+    fun MaterialSwitch.onCheckedChange(id: Int){
+
+        val viewId = this.id
+        val viewIdString = requireContext().resources.getResourceEntryName(viewId)
+
+        if(counter <= 4){
+            if(viewId == R.id.egoSwitch){
+                setOnCheckedChangeListener{ _, isChecked ->
+                    if(isChecked){
+                        setSwitchesFalse()
+                        disableSwitches()
+                        bottomNavItemVisibiltyFalse()
+                        (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
+                        counter++
+                    }else{
+                        enebleSwitches()
+                        setSwitchesFalse()
+                        (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
+                        counter--
+                    }
+                }
+            }else{
+                setOnCheckedChangeListener{_,isChecked ->
+                    if(isChecked){
+                        counter++
+                        addItemBottomNav(BottomNavItems(id, viewIdString, R.drawable.baseline_not_interested_24))
+                    }else{
+                        (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = false
+                        counter--
+                    }
+                }
+            }
+        }else{
+            Snackbar.make(requireView(),R.string.limit, Snackbar.LENGTH_SHORT).show()
+        }
+
     }
 
     fun enebleSwitches(){
@@ -113,6 +130,15 @@ class EgoFragment : Fragment() {
             givingSwitch.isChecked = false
             respectSwitch.isChecked = false
         }
+    }
+
+    fun addItemBottomNav(menuItems: BottomNavItems){
+        bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!.setIcon(menuItems.icon)
+    }
+
+    fun fragmentViewCreated(){
+        disableSwitches()
+        binding.egoSwitch.isChecked = true
     }
 
     override fun onDestroyView() {

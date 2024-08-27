@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".screens.EgoFragment">
 
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -13,6 +13,7 @@
         android:layout_marginTop="64dp"
         android:text="@string/hapiness"
         android:textSize="16sp"
+
         app:layout_constraintStart_toStartOf="@+id/kidnessSwitch"
         app:layout_constraintTop_toBottomOf="@+id/kidnessSwitch"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -32,9 +33,9 @@
         android:id="@+id/kidnessSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
         android:text="@string/kidness"
         android:textSize="16sp"
-        android:layout_marginStart="64dp"
         app:layout_constraintStart_toEndOf="@+id/egoSwitch"
         app:layout_constraintTop_toTopOf="@+id/egoSwitch"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -43,9 +44,9 @@
         android:id="@+id/givingSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:text="@string/giving"
         android:textSize="16sp"
-        android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="@+id/egoSwitch"
         app:layout_constraintTop_toBottomOf="@+id/egoSwitch"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -54,9 +55,9 @@
         android:id="@+id/respectSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:text="@string/respect"
         android:textSize="16sp"
-        android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="@+id/givingSwitch"
         app:layout_constraintTop_toBottomOf="@+id/givingSwitch"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
@@ -65,9 +66,10 @@
         android:id="@+id/egoSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ego"
-        android:layout_marginTop="200dp"
         android:layout_marginStart="48dp"
+        android:layout_marginTop="200dp"
+        android:paddingHorizontal="16dp"
+        android:text="@string/ego"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseSwitchCompatOrMaterialXml" />

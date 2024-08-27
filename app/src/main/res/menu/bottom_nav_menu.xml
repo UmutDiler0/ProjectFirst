@@ -2,26 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
-        android:id="@+id/givingFragment"
-        android:title="@string/giving"
-        android:icon="@drawable/baseline_not_interested_24" />
-    <item
-        android:id="@+id/hapinessFragment"
-        android:title="@string/hapiness"
-        android:icon="@drawable/baseline_not_interested_24" />
-    <item
-        android:id="@+id/kidnessFragment"
-        android:title="@string/kidness"
-        android:icon="@drawable/baseline_not_interested_24" />
-    <item
-        android:id="@+id/optimismFragment"
-        android:title="@string/optimism"
-        android:icon="@drawable/baseline_not_interested_24" />
-    <item
-        android:id="@+id/respectFragment"
-        android:title="@string/respect"
-        android:icon="@drawable/baseline_not_interested_24" />
+        android:id="@+id/egoFragment"
+        android:icon="@drawable/baseline_not_interested_24"
+        android:title="@string/ego" />
 
 </menu>
