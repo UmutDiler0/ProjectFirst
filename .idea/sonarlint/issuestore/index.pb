@@ -74,5 +74,3 @@ C
 settings.gradle.kts,7\4\749edfcc96398253e5b3416184e95c46621da850
 @
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
-q
-Aapp/src/main/java/com/example/projectfirst/screens/EgoActivity.kt,7\a\7ae3a649bade85a4314a7514d0cc9bed7383a853

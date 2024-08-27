@@ -17,9 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var navHostFragment: NavHostFragment
     lateinit var bottomNav: BottomNavigationView
-    var menu: Menu? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav = binding.bottomNav
 
-        menu?.findItem(R.id.hapinessFragment)?.isVisible = false
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.bottom_nav_menu, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 
     fun initViews() {
