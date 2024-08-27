@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.EgoFragment">
+
+    <Switch
+        android:id="@+id/hapinessSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hapiness"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="200dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/optimismSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/optimism"
+        android:layout_marginStart="16dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/hapinessSwitch"
+        app:layout_constraintTop_toTopOf="@+id/hapinessSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/kidnessSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/kidness"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/optimismSwitch"
+        app:layout_constraintTop_toTopOf="@+id/optimismSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/givingSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/giving"
+        android:textSize="16sp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/hapinessSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/hapinessSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/respectSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/respect"
+        android:layout_marginTop="32dp"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/optimismSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/optimismSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <Switch
+        android:id="@+id/egoSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ego"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="@+id/kidnessSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/kidnessSwitch"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
