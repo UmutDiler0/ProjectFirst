@@ -13,6 +13,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import com.example.projectfirst.MainActivity
 import com.example.projectfirst.R
+import com.example.projectfirst.common.MAX_ITEM_SIZE
 import com.example.projectfirst.databinding.FragmentEgoBinding
 import com.example.projectfirst.model.BottomNavItems
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,7 +26,8 @@ class EgoFragment : Fragment() {
     private var _binding: FragmentEgoBinding? = null
     private val binding get() = _binding!!
     private val bottomNav: BottomNavigationView? get() = (activity as? MainActivity)?.bottomNav
-    private var counter: Int = 1
+    private var counter: Int = 0
+    private lateinit var switches: List<MaterialSwitch>
 
 
     override fun onCreateView(
@@ -42,6 +44,7 @@ class EgoFragment : Fragment() {
         fragmentViewCreated()
         disableSwitches()
 
+
         with(binding) {
             egoSwitch.onCheckedChange(R.id.egoFragment)
             hapinessSwitch.onCheckedChange(R.id.hapinessFragment)
@@ -49,7 +52,17 @@ class EgoFragment : Fragment() {
             kidnessSwitch.onCheckedChange(R.id.kidnessFragment)
             givingSwitch.onCheckedChange(R.id.givingFragment)
             respectSwitch.onCheckedChange(R.id.respectFragment)
+
         }
+
+        switches = listOf(
+            binding.hapinessSwitch,
+            binding.optimismSwitch,
+            binding.kidnessSwitch,
+            binding.givingSwitch,
+            binding.respectSwitch
+        )
+
     }
 
     fun MaterialSwitch.onCheckedChange(id: Int) {
@@ -57,75 +70,58 @@ class EgoFragment : Fragment() {
         val viewId = this.id
         val viewIdString = requireContext().resources.getResourceEntryName(viewId)
 
-
-        if(counter < 4){
-            Snackbar.make(binding.root, "You already choose 4 behaviour", Snackbar.LENGTH_SHORT).show()
-            return
-        }else{
-            if (viewId == R.id.egoSwitch) {
-                setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        setSwitchesFalse()
-                        disableSwitches()
-                        counter--
-                        checkItemCount(counter)
-                        removeItemBottomNav(
-                            BottomNavItems(
-                                id,
-                                viewIdString,
-                                R.drawable.baseline_not_interested_24
-                            )
+        if (viewId == R.id.egoSwitch) {
+            setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    setSwitchesFalse()
+                    disableSwitches()
+                    counter--
+                    removeItemBottomNav(
+                        BottomNavItems(
+                            id,
+                            viewIdString,
+                            R.drawable.baseline_not_interested_24
                         )
-                        (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
-                    } else {
-                        checkItemCount(counter)
-                        enebleSwitches()
-                        setSwitchesFalse()
-                        addItemBottomNav(
-                            BottomNavItems(
-                                id,
-                                viewIdString,
-                                R.drawable.baseline_not_interested_24
-                            )
+                    )
+                    (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
+                } else {
+                    counter++
+                    enebleSwitches()
+                    setSwitchesFalse()
+                    addItemBottomNav(
+                        BottomNavItems(
+                            id,
+                            viewIdString,
+                            R.drawable.baseline_not_interested_24
                         )
-                        (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
-                    }
-                }
-            } else {
-                setOnCheckedChangeListener { _, isChecked ->
-                    if (isChecked) {
-                        counter++
-                        checkItemCount(counter)
-                        addItemBottomNav(
-                            BottomNavItems(
-                                id,
-                                viewIdString,
-                                R.drawable.baseline_not_interested_24
-                            )
-                        )
-                    } else {
-                        counter--
-                        checkItemCount(counter)
-                        (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = false
-                        removeItemBottomNav(
-                            BottomNavItems(
-                                id,
-                                viewIdString,
-                                R.drawable.baseline_not_interested_24
-                            )
-                        )
-                    }
+                    )
+                    (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
                 }
             }
-        }
-
-    }
-
-    fun checkItemCount(counter: Int){
-        if(counter == 4){
-            Snackbar.make(binding.root, "You already choose 4 behaviour", Snackbar.LENGTH_SHORT).show()
-        }else{
-            return
+        } else {
+            setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    counter++
+                    addItemBottomNav(
+                        BottomNavItems(
+                            id,
+                            viewIdString,
+                            R.drawable.baseline_not_interested_24
+                        )
+                    )
+                } else {
+                    counter--
+                    (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible =
+                        false
+                    removeItemBottomNav(
+                        BottomNavItems(
+                            id,
+                            viewIdString,
+                            R.drawable.baseline_not_interested_24
+                        )
+                    )
+                }
+            }
         }
     }
 
@@ -161,15 +157,20 @@ class EgoFragment : Fragment() {
     }
 
     fun addItemBottomNav(menuItems: BottomNavItems) {
-        if (bottomNav!!.menu.findItem(menuItems.id) != null) {
+        if(counter <= MAX_ITEM_SIZE){
+            if (bottomNav!!.menu.findItem(menuItems.id) != null) {
+                return
+            } else {
+                bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!
+                    .setIcon(menuItems.icon)
+            }
+        }else{
+            Snackbar.make(binding.root, "You can only select 4 items", Snackbar.LENGTH_SHORT).show()
             return
-        } else {
-            bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!
-                .setIcon(menuItems.icon)
         }
-
-
     }
+
+
 
     fun removeItemBottomNav(menuItems: BottomNavItems) {
         if (bottomNav!!.menu.findItem(menuItems.id) == null) {

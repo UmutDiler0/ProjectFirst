@@ -76,3 +76,5 @@ C
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 r
 Bapp/src/main/java/com/example/projectfirst/model/BottomNavItems.kt,2\e\2e6cd53f5511e049e1471eeb9ef9a72abfb26be0
+m
+=app/src/main/java/com/example/projectfirst/common/Constant.kt,6\9\690e1217a2063cd8299fc266aacfc0a07989ab84
