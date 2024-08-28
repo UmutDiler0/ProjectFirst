@@ -78,3 +78,5 @@ r
 Bapp/src/main/java/com/example/projectfirst/model/BottomNavItems.kt,2\e\2e6cd53f5511e049e1471eeb9ef9a72abfb26be0
 m
 =app/src/main/java/com/example/projectfirst/common/Constant.kt,6\9\690e1217a2063cd8299fc266aacfc0a07989ab84
+r
+Bapp/src/main/java/com/example/projectfirst/screens/EgoViewModel.kt,f\c\fc800598cd57ea603bd8508da19883060a595de4

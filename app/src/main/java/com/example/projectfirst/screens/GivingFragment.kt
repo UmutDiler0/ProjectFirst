@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.projectfirst.R
 
 
+
 class GivingFragment : Fragment() {
 
 
@@ -15,6 +16,7 @@ class GivingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_giving, container, false)
     }

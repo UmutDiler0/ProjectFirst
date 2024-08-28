@@ -4,56 +4,38 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Switch
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import com.example.projectfirst.MainActivity
 import com.example.projectfirst.R
-import com.example.projectfirst.common.MAX_ITEM_SIZE
 import com.example.projectfirst.databinding.FragmentEgoBinding
 import com.example.projectfirst.model.BottomNavItems
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.snackbar.Snackbar
 
-
 class EgoFragment : Fragment() {
 
     private var _binding: FragmentEgoBinding? = null
     private val binding get() = _binding!!
     private val bottomNav: BottomNavigationView? get() = (activity as? MainActivity)?.bottomNav
-    private var counter: Int = 0
     private lateinit var switches: List<MaterialSwitch>
-
+    private var MAX_ITEM_SIZE = 4
+    private var rootView: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEgoBinding.inflate(inflater, container, false)
+        if (rootView == null) {
+            rootView = binding.root
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        fragmentViewCreated()
-        disableSwitches()
-
-
-        with(binding) {
-            egoSwitch.onCheckedChange(R.id.egoFragment)
-            hapinessSwitch.onCheckedChange(R.id.hapinessFragment)
-            optimismSwitch.onCheckedChange(R.id.optimismFragment)
-            kidnessSwitch.onCheckedChange(R.id.kidnessFragment)
-            givingSwitch.onCheckedChange(R.id.givingFragment)
-            respectSwitch.onCheckedChange(R.id.respectFragment)
-
-        }
 
         switches = listOf(
             binding.hapinessSwitch,
@@ -63,9 +45,20 @@ class EgoFragment : Fragment() {
             binding.respectSwitch
         )
 
+        fragmentViewCreated()
+        disableSwitches()
+
+        with(binding) {
+            egoSwitch.onCheckedChange(R.id.egoFragment)
+            hapinessSwitch.onCheckedChange(R.id.hapinessFragment)
+            optimismSwitch.onCheckedChange(R.id.optimismFragment)
+            kidnessSwitch.onCheckedChange(R.id.kidnessFragment)
+            givingSwitch.onCheckedChange(R.id.givingFragment)
+            respectSwitch.onCheckedChange(R.id.respectFragment)
+        }
     }
 
-    fun MaterialSwitch.onCheckedChange(id: Int) {
+    private fun MaterialSwitch.onCheckedChange(id: Int) {
 
         val viewId = this.id
         val viewIdString = requireContext().resources.getResourceEntryName(viewId)
@@ -75,24 +68,19 @@ class EgoFragment : Fragment() {
                 if (isChecked) {
                     setSwitchesFalse()
                     disableSwitches()
-                    counter--
                     removeItemBottomNav(
                         BottomNavItems(
                             id,
                             viewIdString,
-                            R.drawable.baseline_not_interested_24
                         )
                     )
                     (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
                 } else {
-                    counter++
                     enebleSwitches()
-                    setSwitchesFalse()
                     addItemBottomNav(
                         BottomNavItems(
                             id,
                             viewIdString,
-                            R.drawable.baseline_not_interested_24
                         )
                     )
                     (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
@@ -101,78 +89,101 @@ class EgoFragment : Fragment() {
         } else {
             setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    counter++
                     addItemBottomNav(
                         BottomNavItems(
                             id,
-                            viewIdString,
-                            R.drawable.baseline_not_interested_24
+                            viewIdString
                         )
                     )
                 } else {
-                    counter--
-                    (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible =
-                        false
-                    removeItemBottomNav(
-                        BottomNavItems(
-                            id,
-                            viewIdString,
-                            R.drawable.baseline_not_interested_24
-                        )
-                    )
+                    (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = false
+                    removeItemBottomNav(BottomNavItems(id, viewIdString))
                 }
             }
         }
     }
 
-    fun enebleSwitches() {
-        with(binding) {
-            hapinessSwitch.isEnabled = true
-            optimismSwitch.isEnabled = true
-            kidnessSwitch.isEnabled = true
-            givingSwitch.isEnabled = true
-            respectSwitch.isEnabled = true
+    private fun enebleSwitches() {
+        for (switch in switches) {
+            switch.isEnabled = true
         }
     }
 
-    fun disableSwitches() {
-        with(binding) {
-            hapinessSwitch.isEnabled = false
-            optimismSwitch.isEnabled = false
-            kidnessSwitch.isEnabled = false
-            givingSwitch.isEnabled = false
-            respectSwitch.isEnabled = false
-            (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
+    private fun disableSwitches() {
+        for (switch in switches) {
+            switch.isEnabled = false
+            setSwitchesFalse()
+        }
+        (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
+    }
+
+    private fun setSwitchesFalse() {
+        for (switch in switches) {
+            switch.isChecked = false
         }
     }
 
-    fun setSwitchesFalse() {
-        with(binding) {
-            hapinessSwitch.isChecked = false
-            optimismSwitch.isChecked = false
-            kidnessSwitch.isChecked = false
-            givingSwitch.isChecked = false
-            respectSwitch.isChecked = false
-        }
-    }
-
-    fun addItemBottomNav(menuItems: BottomNavItems) {
-        if(counter <= MAX_ITEM_SIZE){
+    private fun addItemBottomNav(menuItems: BottomNavItems) {
+        if (bottomNav!!.menu.size() <= MAX_ITEM_SIZE) {
             if (bottomNav!!.menu.findItem(menuItems.id) != null) {
                 return
             } else {
-                bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!
-                    .setIcon(menuItems.icon)
+                when (menuItems.id) {
+                    R.id.hapinessFragment -> bottomNav!!.menu.add(
+                        Menu.NONE,
+                        menuItems.id,
+                        Menu.NONE,
+                        menuItems.title
+                    )!!
+                        .setIcon(R.drawable.happy)
+
+                    R.id.givingFragment -> bottomNav!!.menu.add(
+                        Menu.NONE,
+                        menuItems.id,
+                        Menu.NONE,
+                        menuItems.title
+                    )!!
+                        .setIcon(R.drawable.gift)
+
+                    R.id.optimismFragment -> bottomNav!!.menu.add(
+                        Menu.NONE,
+                        menuItems.id,
+                        Menu.NONE,
+                        menuItems.title
+                    )!!
+                        .setIcon(R.drawable.like)
+
+                    R.id.respectFragment -> bottomNav!!.menu.add(
+                        Menu.NONE,
+                        menuItems.id,
+                        Menu.NONE,
+                        menuItems.title
+                    )!!
+                        .setIcon(R.drawable.respect)
+
+                    R.id.kidnessFragment -> bottomNav!!.menu.add(
+                        Menu.NONE,
+                        menuItems.id,
+                        Menu.NONE,
+                        menuItems.title
+                    )!!
+                        .setIcon(R.drawable.honesty)
+
+                    else -> {
+                        bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!
+                            .setIcon(R.drawable.love_yourself)
+
+                    }
+                }
             }
-        }else{
-            Snackbar.make(binding.root, "You can only select 4 items", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(binding.root, "Bottom Nav only have 5 items", Snackbar.LENGTH_SHORT)
+                .show()
             return
         }
     }
 
-
-
-    fun removeItemBottomNav(menuItems: BottomNavItems) {
+    private fun removeItemBottomNav(menuItems: BottomNavItems) {
         if (bottomNav!!.menu.findItem(menuItems.id) == null) {
             return
         } else {
@@ -181,7 +192,7 @@ class EgoFragment : Fragment() {
 
     }
 
-    fun fragmentViewCreated() {
+    private fun fragmentViewCreated() {
         disableSwitches()
         binding.egoSwitch.isChecked = true
     }
@@ -189,10 +200,5 @@ class EgoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onStart() {
-        super.onStart()
-        fragmentViewCreated()
     }
 }
