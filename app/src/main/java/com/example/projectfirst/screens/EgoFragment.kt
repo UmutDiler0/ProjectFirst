@@ -41,10 +41,8 @@ class EgoFragment : Fragment() {
 
         fragmentViewCreated()
         disableSwitches()
-        bottomNavItemVisibiltyFalse()
 
-
-        with(binding){
+        with(binding) {
             egoSwitch.onCheckedChange(R.id.egoFragment)
             hapinessSwitch.onCheckedChange(R.id.hapinessFragment)
             optimismSwitch.onCheckedChange(R.id.optimismFragment)
@@ -52,49 +50,87 @@ class EgoFragment : Fragment() {
             givingSwitch.onCheckedChange(R.id.givingFragment)
             respectSwitch.onCheckedChange(R.id.respectFragment)
         }
-
     }
 
-    fun MaterialSwitch.onCheckedChange(id: Int){
+    fun MaterialSwitch.onCheckedChange(id: Int) {
 
         val viewId = this.id
         val viewIdString = requireContext().resources.getResourceEntryName(viewId)
 
-        if(counter <= 4){
-            if(viewId == R.id.egoSwitch){
-                setOnCheckedChangeListener{ _, isChecked ->
-                    if(isChecked){
+
+        if(counter < 4){
+            Snackbar.make(binding.root, "You already choose 4 behaviour", Snackbar.LENGTH_SHORT).show()
+            return
+        }else{
+            if (viewId == R.id.egoSwitch) {
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
                         setSwitchesFalse()
                         disableSwitches()
-                        bottomNavItemVisibiltyFalse()
+                        counter--
+                        checkItemCount(counter)
+                        removeItemBottomNav(
+                            BottomNavItems(
+                                id,
+                                viewIdString,
+                                R.drawable.baseline_not_interested_24
+                            )
+                        )
                         (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
-                        counter++
-                    }else{
+                    } else {
+                        checkItemCount(counter)
                         enebleSwitches()
                         setSwitchesFalse()
+                        addItemBottomNav(
+                            BottomNavItems(
+                                id,
+                                viewIdString,
+                                R.drawable.baseline_not_interested_24
+                            )
+                        )
                         (activity as? MainActivity)?.bottomNav?.visibility = View.VISIBLE
-                        counter--
                     }
                 }
-            }else{
-                setOnCheckedChangeListener{_,isChecked ->
-                    if(isChecked){
+            } else {
+                setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked) {
                         counter++
-                        addItemBottomNav(BottomNavItems(id, viewIdString, R.drawable.baseline_not_interested_24))
-                    }else{
-                        (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = false
+                        checkItemCount(counter)
+                        addItemBottomNav(
+                            BottomNavItems(
+                                id,
+                                viewIdString,
+                                R.drawable.baseline_not_interested_24
+                            )
+                        )
+                    } else {
                         counter--
+                        checkItemCount(counter)
+                        (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = false
+                        removeItemBottomNav(
+                            BottomNavItems(
+                                id,
+                                viewIdString,
+                                R.drawable.baseline_not_interested_24
+                            )
+                        )
                     }
                 }
             }
-        }else{
-            Snackbar.make(requireView(),R.string.limit, Snackbar.LENGTH_SHORT).show()
         }
 
     }
 
-    fun enebleSwitches(){
-        with(binding){
+    fun checkItemCount(counter: Int){
+        if(counter == 4){
+            Snackbar.make(binding.root, "You already choose 4 behaviour", Snackbar.LENGTH_SHORT).show()
+        }else{
+            return
+        }
+    }
+
+    fun enebleSwitches() {
+        with(binding) {
             hapinessSwitch.isEnabled = true
             optimismSwitch.isEnabled = true
             kidnessSwitch.isEnabled = true
@@ -103,8 +139,8 @@ class EgoFragment : Fragment() {
         }
     }
 
-    fun disableSwitches(){
-        with(binding){
+    fun disableSwitches() {
+        with(binding) {
             hapinessSwitch.isEnabled = false
             optimismSwitch.isEnabled = false
             kidnessSwitch.isEnabled = false
@@ -114,16 +150,8 @@ class EgoFragment : Fragment() {
         }
     }
 
-    fun bottomNavItemVisibiltyFalse(){
-        (activity as? MainActivity)?.bottomNav?.menu?.findItem(R.id.hapinessFragment)?.isVisible = false
-        (activity as? MainActivity)?.bottomNav?.menu?.findItem(R.id.optimismFragment)?.isVisible = false
-        (activity as? MainActivity)?.bottomNav?.menu?.findItem(R.id.kidnessFragment)?.isVisible = false
-        (activity as? MainActivity)?.bottomNav?.menu?.findItem(R.id.givingFragment)?.isVisible = false
-        (activity as? MainActivity)?.bottomNav?.menu?.findItem(R.id.respectFragment)?.isVisible = false
-    }
-
-    fun setSwitchesFalse(){
-        with(binding){
+    fun setSwitchesFalse() {
+        with(binding) {
             hapinessSwitch.isChecked = false
             optimismSwitch.isChecked = false
             kidnessSwitch.isChecked = false
@@ -132,11 +160,27 @@ class EgoFragment : Fragment() {
         }
     }
 
-    fun addItemBottomNav(menuItems: BottomNavItems){
-        bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!.setIcon(menuItems.icon)
+    fun addItemBottomNav(menuItems: BottomNavItems) {
+        if (bottomNav!!.menu.findItem(menuItems.id) != null) {
+            return
+        } else {
+            bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!
+                .setIcon(menuItems.icon)
+        }
+
+
     }
 
-    fun fragmentViewCreated(){
+    fun removeItemBottomNav(menuItems: BottomNavItems) {
+        if (bottomNav!!.menu.findItem(menuItems.id) == null) {
+            return
+        } else {
+            bottomNav!!.menu.removeItem(menuItems.id)
+        }
+
+    }
+
+    fun fragmentViewCreated() {
         disableSwitches()
         binding.egoSwitch.isChecked = true
     }
