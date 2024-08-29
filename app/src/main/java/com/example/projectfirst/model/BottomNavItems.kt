@@ -5,8 +5,3 @@ data class BottomNavItems(
     val title: String,
     val icon: Int? = null
 )
-
-data class EgoUIState(
-    val id: Int = 0,
-    val isChecked: Boolean = false
-)

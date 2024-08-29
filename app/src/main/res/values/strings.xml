@@ -3,10 +3,13 @@
     <string name="hapiness">Hapiness</string>
     <string name="optimism">Optimism</string>
     <string name="kidness">Kindness</string>
-    <string name="giving">Giving</string>
-    <string name="respect">Respect</string>
-    <string name="ego">Ego</string>
+    <string name="giving">Giving  </string>
+    <string name="respect">Respect </string>
+    <string name="ego">Ego     </string>
     <string  name="limit">You can only select 4 items</string>
+    <string  name="givingText">You can only select 4 items</string>
+    <string  name="hapinessText">You can only select 4 items</string>
+    <string  name="kindnessText">You can only select 4 items</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

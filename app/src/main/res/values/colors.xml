@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="givingColor1">#e9d022</color>
+    <color name="givingColor2">#e60b09</color>
+    <color name="egoBackground">#060d17</color>
+    <color name="textColor">#FFFFFFFF</color>
+    <color name="hapinessColor1">#45cde9</color>
+    <color name="hapinessColor2">#7a8fd3</color>
+    <color name="kdinessColor1">#f40752</color>
+    <color name="kdinessColor2">#f9ab8f</color>
+    <color name="respectColor1">#4dc9e6</color>
+    <color name="respectColor2">#210cae</color>
 </resources>

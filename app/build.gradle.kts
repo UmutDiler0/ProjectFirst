@@ -41,6 +41,8 @@ android {
 dependencies {
 
 
+    implementation (libs.rive.android)
+    implementation (libs.androidx.startup.runtime)
 
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)

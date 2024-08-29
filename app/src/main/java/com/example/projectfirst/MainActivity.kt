@@ -1,14 +1,19 @@
 package com.example.projectfirst
 
+import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.startup.AppInitializer
+import app.rive.runtime.kotlin.RiveInitializer
+import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import com.example.projectfirst.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -18,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var navHostFragment: NavHostFragment
     lateinit var bottomNav: BottomNavigationView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,9 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav = binding.bottomNav
 
+        AppInitializer.getInstance(applicationContext)
+            .initializeComponent(RiveInitializer::class.java)
+
     }
 
-    fun initViews() {
+    private fun initViews() {
         enableEdgeToEdge()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -39,7 +48,5 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragmentView) as NavHostFragment
         binding.bottomNav.setupWithNavController(navHostFragment.navController)
     }
-
-
 
 }

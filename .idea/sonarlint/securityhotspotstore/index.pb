@@ -30,14 +30,10 @@ P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
 Å
 Q.idea/sonarlint/securityhotspotstore/1/4/148af65d6ce98e72f92ea9e8b253a66030ad1312,6\2\62b558d61a65db83b2d168bf2932386c107e9314
-w
-G.idea/sonarlint/issuestore/9/7/97b52419897db1c19cb739ffd859f16d629a30f4,3\0\3053a358d6d4fa979349525af7f416f38c358cd2
 I
 gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
 w
 G.idea/sonarlint/issuestore/d/2/d2a4383452aad84a18429a5844d31330a012a9e6,4\1\41d94d542eb07930019955e360e3288fdff2668b
-w
-G.idea/sonarlint/issuestore/9/2/92f5182710d25ad7e085b71355bb1edceb9ea597,2\f\2f3366e2b2510190868e75bf55feb06013e580a4
 w
 G.idea/sonarlint/issuestore/b/f/bfe88c34486f57afa8cd226cba537d88280e2f4b,6\d\6df1a73667585d59a948ab7118766d1b18422f0b
 7
@@ -60,8 +56,6 @@ Q.idea/sonarlint/securityhotspotstore/4/3/43b8910240df0cc1c9c64eeaf8c325701ec3a0
 Q.idea/sonarlint/securityhotspotstore/6/1/618777d56f7f374f0c4a9af397c0feff0d161339,7\c\7c461a79bb430a3e484cfc86d7af5ddc9255520f
 X
 (gradle/wrapper/gradle-wrapper.properties,f\b\fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
-w
-G.idea/sonarlint/issuestore/b/f/bf9c8cd13d93b2eb247e6b5d16ac9d6ab8ae972c,7\c\7c328f261217e219f6b196a013cfce0fbd3b726c
 Å
 Q.idea/sonarlint/securityhotspotstore/d/2/d2a4383452aad84a18429a5844d31330a012a9e6,7\f\7fcac164c7a46b8fc6411ea93226c884af6044db
 w
@@ -76,7 +70,3 @@ C
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 r
 Bapp/src/main/java/com/example/projectfirst/model/BottomNavItems.kt,2\e\2e6cd53f5511e049e1471eeb9ef9a72abfb26be0
-m
-=app/src/main/java/com/example/projectfirst/common/Constant.kt,6\9\690e1217a2063cd8299fc266aacfc0a07989ab84
-r
-Bapp/src/main/java/com/example/projectfirst/screens/EgoViewModel.kt,f\c\fc800598cd57ea603bd8508da19883060a595de4

@@ -1,11 +1,15 @@
 package com.example.projectfirst.screens
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
+import app.rive.runtime.kotlin.core.Rive
 import com.example.projectfirst.MainActivity
 import com.example.projectfirst.R
 import com.example.projectfirst.databinding.FragmentEgoBinding
@@ -22,18 +26,25 @@ class EgoFragment : Fragment() {
     private lateinit var switches: List<MaterialSwitch>
     private var MAX_ITEM_SIZE = 4
     private var rootView: View? = null
+    private val stateMachineName = "State Machine 1"
+
+    companion object  {
+        const val STATE_MACHINE = "State Machine 1"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEgoBinding.inflate(inflater, container, false)
+        Rive.init(requireContext())
         if (rootView == null) {
             rootView = binding.root
         }
         return binding.root
     }
 
+    @OptIn(ExperimentalAssetLoader::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -48,6 +59,8 @@ class EgoFragment : Fragment() {
         fragmentViewCreated()
         disableSwitches()
 
+        bottomNav!!.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.egoBackground))
+
         with(binding) {
             egoSwitch.onCheckedChange(R.id.egoFragment)
             hapinessSwitch.onCheckedChange(R.id.hapinessFragment)
@@ -55,6 +68,10 @@ class EgoFragment : Fragment() {
             kidnessSwitch.onCheckedChange(R.id.kidnessFragment)
             givingSwitch.onCheckedChange(R.id.givingFragment)
             respectSwitch.onCheckedChange(R.id.respectFragment)
+            firstTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
+            secondTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
+            thirdTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
+            fourthTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
         }
     }
 
@@ -89,6 +106,7 @@ class EgoFragment : Fragment() {
         } else {
             setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
+                    lightTorch()
                     addItemBottomNav(
                         BottomNavItems(
                             id,
@@ -101,6 +119,27 @@ class EgoFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun lightTorch(){
+        when(bottomNav!!.menu.size()){
+            1 ->{
+                binding.firstTorch.setNumberState(stateMachineName,"Fire",1F)
+            }
+            2 ->{
+                binding.secondTorch.setNumberState(stateMachineName,"Fire",1F)
+            }
+            3 ->{
+                binding.thirdTorch.setNumberState(stateMachineName,"Fire",1F)
+            }
+            4 ->{
+                binding.fourthTorch.setNumberState(stateMachineName,"Fire",1F)
+            }
+        }
+    }
+
+    private fun offTorch(){
+
     }
 
     private fun enebleSwitches() {
@@ -172,7 +211,6 @@ class EgoFragment : Fragment() {
                     else -> {
                         bottomNav!!.menu.add(Menu.NONE, menuItems.id, Menu.NONE, menuItems.title)!!
                             .setIcon(R.drawable.love_yourself)
-
                     }
                 }
             }
