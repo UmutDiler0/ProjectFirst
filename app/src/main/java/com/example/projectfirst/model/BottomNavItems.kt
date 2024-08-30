@@ -1,7 +1,9 @@
 package com.example.projectfirst.model
 
 data class BottomNavItems(
-    val id: Int,
+    val icon: Int? = null,
+    val label: String? = null,
     val title: String,
-    val icon: Int? = null
+
+
 )

@@ -52,13 +52,16 @@ android {
 
 dependencies {
 
+    val nav_version = "2.7.7"
 
+    implementation(libs.ui)
+    implementation(libs.material3)
+
+    implementation(libs.androidx.navigation.compose)
     implementation (libs.rive.android)
     implementation (libs.androidx.startup.runtime)
-
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui)
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
