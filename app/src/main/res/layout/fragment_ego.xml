@@ -9,8 +9,8 @@
 
     <app.rive.runtime.kotlin.RiveAnimationView
         android:id="@+id/secondTorch"
-        android:layout_width="199dp"
-        android:layout_height="250dp"
+        android:layout_width="231dp"
+        android:layout_height="282dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,8 +18,8 @@
 
     <app.rive.runtime.kotlin.RiveAnimationView
         android:id="@+id/fourthTorch"
-        android:layout_width="199dp"
-        android:layout_height="250dp"
+        android:layout_width="231dp"
+        android:layout_height="282dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,16 +27,16 @@
 
     <app.rive.runtime.kotlin.RiveAnimationView
         android:id="@+id/firstTorch"
-        android:layout_width="199dp"
-        android:layout_height="250dp"
+        android:layout_width="231dp"
+        android:layout_height="282dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <app.rive.runtime.kotlin.RiveAnimationView
         android:id="@+id/thirdTorch"
-        android:layout_width="199dp"
-        android:layout_height="250dp"
+        android:layout_width="231dp"
+        android:layout_height="282dp"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/nerko_one"
         android:text="@string/hapiness"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textColor="@color/textColor"
         app:layout_constraintStart_toStartOf="@+id/kidnessSwitch"
         app:layout_constraintTop_toBottomOf="@+id/kidnessSwitch"
@@ -62,7 +62,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/optimism"
         android:textColor="@color/textColor"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:fontFamily="@font/nerko_one"
         app:layout_constraintStart_toStartOf="@+id/hapinessSwitch"
         app:layout_constraintTop_toBottomOf="@+id/hapinessSwitch"
@@ -75,7 +75,7 @@
         android:layout_marginStart="64dp"
         android:text="@string/kidness"
         android:textColor="@color/textColor"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:fontFamily="@font/nerko_one"
         app:layout_constraintStart_toEndOf="@+id/egoSwitch"
         app:layout_constraintTop_toTopOf="@+id/egoSwitch"
@@ -88,7 +88,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/giving"
         android:textColor="@color/textColor"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:fontFamily="@font/nerko_one"
         app:layout_constraintStart_toStartOf="@+id/egoSwitch"
         app:layout_constraintTop_toBottomOf="@+id/egoSwitch"
@@ -102,7 +102,7 @@
         android:fontFamily="@font/nerko_one"
         android:text="@string/respect"
         android:textColor="@color/textColor"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/givingSwitch"
 
         app:layout_constraintTop_toBottomOf="@+id/givingSwitch"
@@ -112,12 +112,16 @@
         android:id="@+id/egoSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="120dp"
         android:text="@string/ego"
+        android:fontFamily="@font/nerko_one"
         android:textColor="@color/textColor"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.358"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secondTorch"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

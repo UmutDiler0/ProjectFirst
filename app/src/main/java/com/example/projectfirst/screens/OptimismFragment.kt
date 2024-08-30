@@ -16,7 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class OptimismFragment : Fragment() {
 
     private var _binding: FragmentOptimismBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
     private val bottomNav: BottomNavigationView? get() = (activity as? MainActivity)?.bottomNav
 
 
@@ -33,7 +33,7 @@ class OptimismFragment : Fragment() {
 
         Rive.init(requireContext())
 
-        bottomNav!!.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.kdinessColor1))
+        bottomNav!!.setBackgroundColor(ContextCompat.getColor(requireContext(),R.color.optimismColor1))
     }
 
     override fun onDestroyView() {

@@ -138,10 +138,6 @@ class EgoFragment : Fragment() {
         }
     }
 
-    private fun offTorch(){
-
-    }
-
     private fun enebleSwitches() {
         for (switch in switches) {
             switch.isEnabled = true

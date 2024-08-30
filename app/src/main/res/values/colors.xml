@@ -12,4 +12,6 @@
     <color name="kdinessColor2">#f9ab8f</color>
     <color name="respectColor1">#4dc9e6</color>
     <color name="respectColor2">#210cae</color>
+    <color name="optimismColor1">#00ff87</color>
+    <color name="optimismColor2">#60efff</color>
 </resources>
