@@ -1,7 +1,8 @@
 # ProjectFirstWithKeKod
 
 [![Lisans](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[firstProjectDemo.webm](https://github.com/user-attachments/assets/ea61848a-658d-4ba7-84d4-5b7f8495ced9)
+
+[firstProjectDemo.mp4](https://github.com/user-attachments/assets/ea61848a-658d-4ba7-84d4-5b7f8495ced9)
 
 ## Genel Bakış
 
