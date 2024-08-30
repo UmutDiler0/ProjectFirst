@@ -70,3 +70,5 @@ C
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 r
 Bapp/src/main/java/com/example/projectfirst/model/BottomNavItems.kt,2\e\2e6cd53f5511e049e1471eeb9ef9a72abfb26be0
+t
+Dapp/src/main/java/com/example/projectfirst/screens/TorchViewModel.kt,d\f\df891e17a69cda76ae04d02bfc7fe03d96ba5c67

@@ -23,3 +23,5 @@ I
 gradle/libs.versions.toml,d\7\d7595319a0658be6f1ed500ad590d42e4b28bc4f
 r
 Bapp/src/main/java/com/example/projectfirst/model/BottomNavItems.kt,2\e\2e6cd53f5511e049e1471eeb9ef9a72abfb26be0
+t
+Dapp/src/main/java/com/example/projectfirst/screens/TorchViewModel.kt,d\f\df891e17a69cda76ae04d02bfc7fe03d96ba5c67

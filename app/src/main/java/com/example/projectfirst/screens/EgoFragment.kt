@@ -1,5 +1,6 @@
 package com.example.projectfirst.screens
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import app.rive.runtime.kotlin.core.ExperimentalAssetLoader
 import app.rive.runtime.kotlin.core.Rive
 import com.example.projectfirst.MainActivity
@@ -25,22 +27,15 @@ class EgoFragment : Fragment() {
     private val bottomNav: BottomNavigationView? get() = (activity as? MainActivity)?.bottomNav
     private lateinit var switches: List<MaterialSwitch>
     private var MAX_ITEM_SIZE = 4
-    private var rootView: View? = null
     private val stateMachineName = "State Machine 1"
 
-    companion object  {
-        const val STATE_MACHINE = "State Machine 1"
-    }
-
+    @OptIn(ExperimentalAssetLoader::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEgoBinding.inflate(inflater, container, false)
         Rive.init(requireContext())
-        if (rootView == null) {
-            rootView = binding.root
-        }
         return binding.root
     }
 
@@ -59,7 +54,12 @@ class EgoFragment : Fragment() {
         fragmentViewCreated()
         disableSwitches()
 
-        bottomNav!!.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.egoBackground))
+        bottomNav!!.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.egoBackground
+            )
+        )
 
         with(binding) {
             egoSwitch.onCheckedChange(R.id.egoFragment)
@@ -68,11 +68,12 @@ class EgoFragment : Fragment() {
             kidnessSwitch.onCheckedChange(R.id.kidnessFragment)
             givingSwitch.onCheckedChange(R.id.givingFragment)
             respectSwitch.onCheckedChange(R.id.respectFragment)
-            firstTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
-            secondTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
-            thirdTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
-            fourthTorch.setRiveResource(R.raw.torch,stateMachineName = stateMachineName)
+            firstTorch.setRiveResource(R.raw.torch, stateMachineName = stateMachineName)
+            secondTorch.setRiveResource(R.raw.torch, stateMachineName = stateMachineName)
+            thirdTorch.setRiveResource(R.raw.torch, stateMachineName = stateMachineName)
+            fourthTorch.setRiveResource(R.raw.torch, stateMachineName = stateMachineName)
         }
+
     }
 
     private fun MaterialSwitch.onCheckedChange(id: Int) {
@@ -85,6 +86,7 @@ class EgoFragment : Fragment() {
                 if (isChecked) {
                     setSwitchesFalse()
                     disableSwitches()
+                    offTorch()
                     removeItemBottomNav(
                         BottomNavItems(
                             id,
@@ -94,6 +96,7 @@ class EgoFragment : Fragment() {
                     (activity as? MainActivity)?.bottomNav?.visibility = View.GONE
                 } else {
                     enebleSwitches()
+                    lightTorch()
                     addItemBottomNav(
                         BottomNavItems(
                             id,
@@ -114,6 +117,7 @@ class EgoFragment : Fragment() {
                         )
                     )
                 } else {
+                    offTorch()
                     (activity as? MainActivity)?.bottomNav?.menu?.findItem(id)?.isVisible = false
                     removeItemBottomNav(BottomNavItems(id, viewIdString))
                 }
@@ -121,19 +125,56 @@ class EgoFragment : Fragment() {
         }
     }
 
-    private fun lightTorch(){
-        when(bottomNav!!.menu.size()){
-            1 ->{
-                binding.firstTorch.setNumberState(stateMachineName,"Fire",1F)
+    @OptIn(ExperimentalAssetLoader::class)
+    private fun lightTorch() {
+        when (bottomNav!!.menu.size()) {
+            1 -> {
+                binding.firstTorch.setNumberState(stateMachineName, "Fire", 1F)
             }
-            2 ->{
-                binding.secondTorch.setNumberState(stateMachineName,"Fire",1F)
+
+            2 -> {
+                binding.firstTorch.setNumberState(stateMachineName, "Fire", 1F)
+                binding.secondTorch.setNumberState(stateMachineName, "Fire", 1F)
             }
-            3 ->{
-                binding.thirdTorch.setNumberState(stateMachineName,"Fire",1F)
+
+            3 -> {
+                binding.firstTorch.setNumberState(stateMachineName, "Fire", 1F)
+                binding.secondTorch.setNumberState(stateMachineName, "Fire", 1F)
+                binding.thirdTorch.setNumberState(stateMachineName, "Fire", 1F)
             }
-            4 ->{
-                binding.fourthTorch.setNumberState(stateMachineName,"Fire",1F)
+
+            4 -> {
+                binding.firstTorch.setNumberState(stateMachineName, "Fire", 1F)
+                binding.secondTorch.setNumberState(stateMachineName, "Fire", 1F)
+                binding.thirdTorch.setNumberState(stateMachineName, "Fire", 1F)
+                binding.fourthTorch.setNumberState(stateMachineName, "Fire", 1F)
+            }
+        }
+    }
+
+    @OptIn(ExperimentalAssetLoader::class)
+    private fun offTorch() {
+        when (bottomNav!!.menu.size()) {
+            1 -> {
+                binding.firstTorch.setNumberState(stateMachineName, "Fire", 0F)
+                binding.secondTorch.setNumberState(stateMachineName, "Fire", 0F)
+                binding.thirdTorch.setNumberState(stateMachineName, "Fire", 0F)
+                binding.fourthTorch.setNumberState(stateMachineName, "Fire", 0F)
+            }
+
+            2 -> {
+                binding.secondTorch.setNumberState(stateMachineName, "Fire", 0F)
+                binding.thirdTorch.setNumberState(stateMachineName, "Fire", 0F)
+                binding.fourthTorch.setNumberState(stateMachineName, "Fire", 0F)
+            }
+
+            3 -> {
+                binding.thirdTorch.setNumberState(stateMachineName, "Fire", 0F)
+                binding.fourthTorch.setNumberState(stateMachineName, "Fire", 0F)
+            }
+
+            4 -> {
+                binding.fourthTorch.setNumberState(stateMachineName, "Fire", 0F)
             }
         }
     }
